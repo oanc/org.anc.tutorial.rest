@@ -1,7 +1,7 @@
 REST Services Tutorial
 ==================
 
-This is a short tutorial on creating REST services using JAX-RS and the ANC applications stack.
+This is a short tutorial on creating REST services using JAX-RS and the ANC application stack.
 
 ## Prerequisites
 
@@ -10,19 +10,21 @@ It is assumed you have the following installed and configured.
 1. Java 1.7 or later
 1. Maven 3.x with the ANC’s setting.xml file
 1. Groovy 2.x
-1. A suitable IDE. I recommend the community edition of [IntelliJ](http://www.jetbrains.com/idea/download/), but Eclipse and Netbeans will work as well.  However, these instructions assume IntelliJ and users of other IDEs will have to figure out the equivalent commands on their own.
+1. A suitable IDE. I recommend the community edition of [IntelliJ](http://www.jetbrains.com/idea/download/), but Eclipse and Netbeans will work as well.  These instructions assume IntelliJ is being used.
 1. A Tomcat server installed (optional)
 
 ## Create the project
 
-Select `File -> New Project...`, select a *Maven* project type and click the *Next* button.
-
-Select a *Maven* project and click the *Next* button.
+1. Select `File -> New Project...`
+2. Select a *Maven* project type
+3. Click the *Next* button.
 
 ## Add the Groovy framework
 
-Right click the project in the *Project* view and select *Add Framework Support...`. Select *Groovy* and click the
-*Ok* button.
+1. Right click on the project in the *Project* view 
+2. Select *Add Framework Support...*
+3. Select *Groovy* 
+4. Click the *Ok* button.
 
 ## Project layout
 
@@ -66,7 +68,7 @@ testing and development.  The plugin is declared in the `<build>` section of the
 </build>
 ```
 	
-### Create a Groovy class
+## Create a Groovy class
 
 1. Create a new package in *src/main/groovy* named `org.anc.tutorial.rest`
 1. Create a new Groovy class in the above package named `SimpleService`
@@ -79,7 +81,7 @@ class SimpleService {
 }
 ```
 
-### Create a Unit Test (optional)
+## Create a Unit Test (optional)
 
 1. Create a new package in *src/test/groovy* named `org.anc.tutorial.rest`
 1. Create a new class in the above package named `SimpleServiceTest`
@@ -97,7 +99,7 @@ class SimpleServiceTest {
 ```
 Run the test and fix any typos until the test passes.
 
-### Make SimpleService a web service:
+## Make SimpleService a web service:
 
 1. Create the file *src/main/webapp/WEB-INF/web.xml*
 1. Paste the following into the above file.<br/>
@@ -124,10 +126,10 @@ Run the test and fix any typos until the test passes.
     </welcome-file-list>
 </web-app>
 ```
-3. Annotate the SimpleService class
-    1. add `@Path` to the class declaration
-    1. add `@GET` to the `greet()` method
-	1. add `@QueryParam(‘who’)` to the greet method’s `who` parameter
+### Annotate the SimpleService class
+1. add `@Path` to the class declaration
+1. add `@GET` to the `greet()` method
+1. add `@QueryParam(‘who’)` to the greet method’s `who` parameter
 	
 ```java
 @Path(‘/greet’)
@@ -139,26 +141,14 @@ class SimpleService {
 	
 }		
 ```
-	
-4. Add methods that respond to POST requests
- 1. add a method `handleText(String text)` that consumes text/plain
- 1. add a method `handleHtml(String html)` that consumes text/html
+
+## Test the service
+
+## HTTP Response
+
+## Respond to POST requests
+
+Add two methods that respond to POST requests
+1. add a method `handleText(String text)` that consumes text/plain
+1. add a method `handleHtml(String html)` that consumes text/html
  
-The class should  now look something like:
-
-```java
-@Path(‘/greet’)
-class SimpleService {
-	@GET
-	String greet(@QueryParam(‘who’) String who) {
-		return “Hello $who”
-	}
-	
-}		
-```
-Modify
-Add POST methods:
-	- one that accepts text/html
-	- one that accepts text/plain
-
-@POST
