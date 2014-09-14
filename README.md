@@ -124,7 +124,7 @@ Run the test and fix any typos until the test passes.
     </welcome-file-list>
 </web-app>
 ```
-1. Annotate the SimpleService class
+3. Annotate the SimpleService class
     1. add `@Path` to the class declaration
     1. add `@GET` to the `greet()` method
 	1. add `@QueryParam(‘who’)` to the greet method’s `who` parameter
@@ -140,7 +140,7 @@ class SimpleService {
 }		
 ```
 	
-1. Add methods that respond to POST requests
+4. Add methods that respond to POST requests
  1. add a method `handleText(String text)` that consumes text/plain
  1. add a method `handleHtml(String html)` that consumes text/html
  
