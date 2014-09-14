@@ -79,9 +79,12 @@ class SimpleService {
 }
 ```
 
-Create a new package in src/test/groovy named org.anc.tutorial.rest
-Create a new class in the above package named SimpleServiceTest
+### Create a Unit Test (optional)
 
+1. Create a new package in *src/test/groovy* named `org.anc.tutorial.rest`
+1. Create a new class in the above package named `SimpleServiceTest`
+
+```java
 import org.junit.*
 import static org.junit.Assert.*
 
@@ -91,14 +94,14 @@ class SimpleServiceTest {
 		assertTrue ‘Hello world’ == new SimpleService().greet(“world”)
 	}
 }
-
+```
 Run the test and fix any typos until the test passes.
 
-Make SimpleService a web service:
+### Make SimpleService a web service:
 
-Create the file src/main/webapp/WEB-INF/web.xml
-
-<?xml version="1.0" encoding="UTF-8"?>
+1. Create the file *src/main/webapp/WEB-INF/web.xml*
+1. Paste the following into the above file.<br/>
+```xml
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
     <display-name>Tutorial Services</display-name>
 
@@ -120,21 +123,39 @@ Create the file src/main/webapp/WEB-INF/web.xml
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
 </web-app>
-
-Annotate the SimpleService class
-
-	- add @Path to the class declaration
-	- add @GET to the greet() method
-	- add @QueryParam(‘who’) to the greet method’s ‘who’ parameter
-
+```
+1. Annotate the SimpleService class
+    1. add `@Path` to the class declaration
+    1. add `@GET` to the `greet()` method
+	1. add `@QueryParam(‘who’)` to the greet method’s `who` parameter
+	
+```java
 @Path(‘/greet’)
 class SimpleService {
 	@GET
 	String greet(@QueryParam(‘who’) String who) {
 		return “Hello $who”
 	}
+	
 }		
+```
+	
+1. Add methods that respond to POST requests
+ 1. add a method `handleText(String text)` that consumes text/plain
+ 1. add a method `handleHtml(String html)` that consumes text/html
+ 
+The class should  now look something like:
 
+```java
+@Path(‘/greet’)
+class SimpleService {
+	@GET
+	String greet(@QueryParam(‘who’) String who) {
+		return “Hello $who”
+	}
+	
+}		
+```
 Modify
 Add POST methods:
 	- one that accepts text/html
