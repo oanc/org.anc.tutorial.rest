@@ -157,28 +157,35 @@ You should see the message *Hello world* in your browser window.
 
 ## HTTP Response
 
-While returning a single String is sufficient in many cases there are times more
-control is needed over the HTTP response sent back to the client. 
+Web service methods (i.e. methods annotated with @GET or @POST) typically need to return more information than a simple
+String object. The `Response` class provides a [builder](http://en.wikipedia.org/wiki/Builder_pattern) that can be used to
+construct the HTTP response that will be returned to the client.  
 
-The javax.ws.rs.core.Response class provides methods that can be used to tweak the HTTP response return to the client.
+For the remainder of this tutorial the following methods will be used to construct `Response` objects
+```java
+Response respond(String message) {
+	return Response.ok(message).build()
+}
+Response error(String message) {
+	return Response.serverError().entity(message).build()
+}
+```
  
-The `Response` class provides a [builder](http://en.wikipedia.org/wiki/Builder_pattern) that can be used to
-construct the HTTP response
- 
-
- 
-
 ## Respond to POST requests
 
-Add two methods that respond to POST requests
-1. add a method `handleText(String text)` that consumes text/plain<br/>
+Add two methods that respond to POST requests; one method that consumes `text/plain` and another method that consumes `text/html`
+
 ```java
+@POST
+@Consumes(MediaType.TEXT_PLAIN)
 Response handleText(String text) {
     respond 'Some text was posted\n'
-}```
-1. add a method `handleHtml(String html)` that consumes text/html
-```java
+}
+
+@POST
+@Consumes(MediaType.TEXT_HTML)
 Response handleHtml(String html) {
     respond 'Some html was posted\n' 
-}```
+}
+```
  
