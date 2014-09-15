@@ -144,11 +144,41 @@ class SimpleService {
 
 ## Test the service
 
+Open a terminal window and run the command
+
+    > mvn jetty:run
+  
+After a time you should see the message
+    [INFO] Started Jetty Server
+    
+When you see the above message open a web browser and open http://localhost:8080/greet?who=world
+
+You should see the message *Hello world* in your browser window.
+
 ## HTTP Response
+
+While returning a single String is sufficient in many cases there are times more
+control is needed over the HTTP response sent back to the client. 
+
+The javax.ws.rs.core.Response class provides methods that can be used to tweak the HTTP response return to the client.
+ 
+The `Response` class provides a [builder](http://en.wikipedia.org/wiki/Builder_pattern) that can be used to
+construct the HTTP response
+ 
+
+ 
 
 ## Respond to POST requests
 
 Add two methods that respond to POST requests
-1. add a method `handleText(String text)` that consumes text/plain
+1. add a method `handleText(String text)` that consumes text/plain<br/>
+```java
+Response handleText(String text) {
+    respond 'Some text was posted\n'
+}```
 1. add a method `handleHtml(String html)` that consumes text/html
+```java
+Response handleHtml(String html) {
+    respond 'Some html was posted\n' 
+}```
  
