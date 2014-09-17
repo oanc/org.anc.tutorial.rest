@@ -189,3 +189,20 @@ Response handleHtml(String html) {
 }
 ```
  
+### Testing POST Requests
+
+Since web browsers send GET requests we will use the program *curl* from a terminal to 
+send POST messages to our service. The command is:
+
+    curl -i -X POST -H "Content-Type:text/plain" http://localhost:8080/greet
+    
+The above options are:
+
+ - **-i** (optional)<br/>displays the response headers.
+ - **-X POST**<br/>tells *curl* to send the request as a POST message. If omitted *curl* will send a GET request.
+ - **-H "Content-Type:text/plain"**<br/>sets the content-type header in the request to *text/plain*.  The content-type
+header tells the service what type of data is being sent in the request.  The service will then use this information to
+determine which method should be used (content-type negotiation) to respond to the message.
+    
+ 
+
